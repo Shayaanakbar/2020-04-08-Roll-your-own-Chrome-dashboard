@@ -1,5 +1,7 @@
 # CareerHack Format
 
+
+
 ## Who this Hackathon is for:
 
 This hackathon is for developers of all levels who have some experience with HTML, CSS, and JavaScript. If you're a senior developer, this Hackathon provides great mentorship opportunities that can be rewarding for you, as well.
