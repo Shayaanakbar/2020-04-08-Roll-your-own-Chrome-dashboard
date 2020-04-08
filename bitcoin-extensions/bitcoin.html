@@ -1,13 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Bitcoin Extensions</title>
-	<link rel="stylesheet" type="text/css" href="styles.css">
-</head>
-<body>
-	<h1>Bitcoin Prices</h1>
-	<script src="scripts.js"></script>
-</body>
+<html>
+	<head>
+		<title>Bitcoin Price Index Watcher</title>
+		<link href="styles.css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		<img id="logo" src="https://www.ssaurel.com/cryptocoins/screenshots/web_hi_res_512.png" />
+		<div id="data"></div>
+		<script type="text/javascript">
+			var xmlhttp = new XMLHttpRequest();
+			var url = "https://api.coindesk.com/v1/bpi/currentprice.json";
+
+			xmlhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					var json = JSON.parse(this.responseText);
+					parseJson(json);
+				}
+			};
+
+			xmlhttp.open("GET", url, true);
+			xmlhttp.send();
+
+			function parseJson(json) {
+				var time = "<b>Last Updated: " + json["time"]["updated"] + "</b>"
+				var usdValue = "1 BTC equals to $" + json["bpi"]["USD"]["rate"];
+				var gbpValue = "1 BTC equals to &pound;" + json["bpi"]["GBP"]["rate"];
+				var euroValue = "1 BTC equals to &euro;" + json["bpi"]["EUR"]["rate"];
+
+				document.getElementById("data").innerHTML = time + "<br /><br />" + usdValue + "<br />" + gbpValue + "<br />" + euroValue;
+			}
+		</script>
+	</body>
 </html>
